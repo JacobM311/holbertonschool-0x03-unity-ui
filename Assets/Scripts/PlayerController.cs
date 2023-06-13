@@ -19,7 +19,11 @@ public class PlayerController : MonoBehaviour
 
     void Update()
     {
-        
+        if (health == 0)
+        { 
+            Debug.Log("Game Over!");
+            ReloadScene();
+        }
     }
 
     void OnTriggerEnter(Collider other)
@@ -27,17 +31,13 @@ public class PlayerController : MonoBehaviour
         if (other.tag == "Pickup")
         {
             score += 1;
-            Debug.Log(score);
+            Debug.Log("Score: " + score);
             Destroy(other.gameObject);
         }
         if (other.tag == "Trap")
         {
             health -= 1;
             Debug.Log("Health: " + health);
-            if (health == 0)
-            {
-                ReloadScene();
-            }
         }
     }
 
@@ -52,25 +52,21 @@ public class PlayerController : MonoBehaviour
         if (Input.GetKey(KeyCode.W))
         {
             rb.AddForce(transform.forward * speed);
-            
         }
 
         if (Input.GetKey(KeyCode.S))
         {
             rb.AddForce(-transform.forward * speed);
-            
         }
 
         if (Input.GetKey(KeyCode.A))
         {
             rb.AddForce(-transform.right * speed);
-            
         }
 
         if (Input.GetKey(KeyCode.D))
         {
             rb.AddForce(transform.right * speed);
-            
         }
     }
 }
