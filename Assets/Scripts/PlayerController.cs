@@ -2,6 +2,8 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine.SceneManagement;
 using UnityEngine;
+using UnityEngine.UI;
+using TMPro;
 
 public class PlayerController : MonoBehaviour
 {
@@ -9,6 +11,7 @@ public class PlayerController : MonoBehaviour
     private Rigidbody rb;
     private int score = 0;
     private int health = 5;
+    public TextMeshProUGUI scoreText;
 
 
     void Start()
@@ -31,7 +34,7 @@ public class PlayerController : MonoBehaviour
         if (other.tag == "Pickup")
         {
             score += 1;
-            Debug.Log("Score: " + score);
+            scoreText.text = "Score: " + score.ToString();
             Destroy(other.gameObject);
         }
         if (other.tag == "Trap")
