@@ -11,8 +11,8 @@ public class PlayerController : MonoBehaviour
     private Rigidbody rb;
     private int score = 0;
     private int health = 5;
-    public TextMeshProUGUI scoreText;
-    public TextMeshProUGUI healthText;
+    public Text scoreText;
+    public Text healthText;
     public Image WinLose;
     public Text WinLoseText;
 
