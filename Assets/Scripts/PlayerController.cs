@@ -12,19 +12,27 @@ public class PlayerController : MonoBehaviour
     private int score = 0;
     private int health = 5;
     public TextMeshProUGUI scoreText;
-
+    public TextMeshProUGUI healthText;
+    public Image WinLose;
+    public Text WinLoseText;
 
     void Start()
     {
         rb = GetComponent<Rigidbody>();
+        WinLose.enabled = false;
+        WinLoseText.enabled = false;
         
     }
 
     void Update()
     {
         if (health == 0)
-        { 
-            Debug.Log("Game Over!");
+        {
+            WinLose.color = Color.red;
+            WinLoseText.color = Color.white;
+            WinLoseText.text = "Game Over!";
+            WinLoseText.enabled = true;
+            WinLose.enabled = true;
             ReloadScene();
         }
     }
@@ -40,18 +48,28 @@ public class PlayerController : MonoBehaviour
         if (other.tag == "Trap")
         {
             health -= 1;
-            Debug.Log("Health: " + health);
+            healthText.text = "Health: " + health.ToString();
         }
         if (other.tag == "Goal")
         {
-            Debug.Log("You Win!");
+            WinLose.enabled = true;
+            WinLoseText.enabled = true;
+            WinLose.color = Color.green;
+            WinLoseText.color = Color.black;
+            WinLoseText.text = "You Win!";
         }
+    }
+
+    IEnumerator LoadScene(float seconds)
+    {
+        yield return new WaitForSeconds(seconds);
+        Scene currentScene = SceneManager.GetActiveScene();
+        SceneManager.LoadScene(currentScene.name);
     }
 
     public void ReloadScene()
     {
-        Scene currentScene = SceneManager.GetActiveScene();
-        SceneManager.LoadScene(currentScene.name);
+        StartCoroutine(LoadScene(3));
     }
 
     void FixedUpdate()
