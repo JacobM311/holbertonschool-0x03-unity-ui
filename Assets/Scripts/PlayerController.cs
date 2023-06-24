@@ -35,6 +35,11 @@ public class PlayerController : MonoBehaviour
             WinLose.enabled = true;
             ReloadScene();
         }
+
+        if (Input.GetKey(KeyCode.Escape))
+        {
+            SceneManager.LoadScene("menu");
+        }
     }
 
     void OnTriggerEnter(Collider other)
@@ -57,6 +62,7 @@ public class PlayerController : MonoBehaviour
             WinLose.color = Color.green;
             WinLoseText.color = Color.black;
             WinLoseText.text = "You Win!";
+            ReloadScene();
         }
     }
 
